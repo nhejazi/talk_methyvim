@@ -1,0 +1,310 @@
+\documentclass[12pt,t]{beamer}
+\usepackage{graphicx}
+\setbeameroption{hide notes}
+\setbeamertemplate{note page}[plain]
+\usepackage{listings}
+\usepackage{datetime}
+\usepackage{url}
+
+%Bibliography
+\usepackage{natbib}
+\bibpunct{(}{)}{,}{a}{}{;}
+\usepackage{bibentry}
+\nobibliography*
+
+\input{header.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% end of header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% title info
+\title{Beamer Template for Presentations}
+\author{\href{http://nimahejazi.org}{Nima Hejazi}}
+\institute{Division of Biostatistics \\
+           University of California, Berkeley \\
+           \href{https://www.stat.berkeley.edu/~nhejazi}
+             {\tt \scriptsize \color{foreground} stat.berkeley.edu/\textasciitilde{}nhejazi}
+          }
+\date{
+  \href{http://nimahejazi.org}
+      {\tt \scriptsize \color{foreground} nimahejazi.org}
+  \\[-4pt]
+  \href{https://twitter.com/nshejazi}
+      {\tt \scriptsize \color{foreground} twitter/@nshejazi}
+  \\[-4pt]
+  \href{https://github.com/nhejazi}
+      {\tt \scriptsize \color{foreground} github/nhejazi}
+}
+
+
+\begin{document}
+
+% title slide
+{
+\setbeamertemplate{footline}{} % no page number here
+\frame{
+  \titlepage
+
+  \vspace{-2em}
+
+  \centerline{\href{https://goo.gl/ic1FpG}{\tt \scriptsize \underline{slides}: goo.gl/ic1FpG}}
+
+  \vfill \hfill \includegraphics[height=6mm]{Figs/cc-zero.png} \vspace*{-0.75cm}
+
+  \note{This slide deck is meant to serve as a template for building
+    presentations conveniently from a reasonable baseline.
+
+    Source: {\tt https://github.com/nhejazi/template\_talks} \\
+    Slides: {\tt https://goo.gl/1bGsgE} \\
+    With notes: {\tt https://goo.gl/ic1FpG}
+}
+}
+}
+
+
+
+\begin{frame}[c]{Preview: Summary}
+\only<1>{\addtocounter{framenumber}{-1}}
+
+\begin{center}
+\begin{itemize}
+  \itemsep12pt
+  \item point here
+  \item point here
+  \item point here
+  \item point here
+\end{itemize}
+\end{center}
+
+\note{We'll go over this summary again at the end of the talk. Hopefully, it
+  will all make more sense then.
+}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile,c]{}
+
+\begin{center}
+\begin{minipage}[c]{9.3cm}
+\begin{semiverbatim}
+\lstset{basicstyle=\normalsize}
+\begin{lstlisting}[linewidth=9.3cm]
+  It's always good to start with a
+  motivating example. Excerpts from
+  famous studies/papers or personal
+  communications usually do nicely.
+
+  It's also good practice to keep
+  things like this rather short.
+
+  --Nima
+\end{lstlisting}
+\end{semiverbatim}
+\end{minipage}
+\end{center}
+
+\note{Obviously, it's important to explain the motivating example here.
+}
+\end{frame}
+
+
+
+\begin{frame}[c]{Setting the Stage, Part I}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Setting the Stage, Part II}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Setting the Stage, Part III}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Introducing the Method or Approach, Part I}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Introducing the Method or Approach, Part II}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Introducing the Method or Approach, Part III}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Discussion of Results, Part I}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Discussion of Results, Part II}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{Review: Summary}
+
+\begin{center}
+\begin{itemize}
+  \itemsep12pt
+  \item Look, we proved this above.
+  \item More stuff we proved.
+  \item Yet another point here.
+  \item Final point goes here.
+\end{itemize}
+\end{center}
+
+\note{It's always good to include a summary.}
+
+\end{frame}
+
+
+
+\begin{frame}{Acknowledgments}
+
+\vspace{18pt}
+
+\begin{tabular}{@{}l@{\hspace{1.5cm}}l@{}}
+Collaborator, the first & \footnotesize \lolit University or Institution 1 \\
+Collaborator, the second & \footnotesize \lolit University or Institution 1 \\
+Collaborator, the third & \footnotesize \lolit University or Institution 1 \\
+
+\\[2ex]
+
+Collaborator, the first & \footnotesize \lolit University or Institution 2 \\
+Collaborator, the second & \footnotesize \lolit University or Institution 2 \\
+\end{tabular}
+
+\vspace{10mm}
+
+NIH - funding source ?
+
+\note{...}
+
+\end{frame}
+
+
+
+\begin{frame}[c]{}
+
+\Large
+Slides: \href{https://goo.gl/ic1FpG}{goo.gl/ic1FpG} \quad
+\includegraphics[height=5mm]{Figs/cc-zero.png}
+
+\vspace{5mm}
+
+Source (repo): \href{https://goo.gl/HmQdNv}{goo.gl/HmQdNv}
+
+\vspace{5mm}
+
+\href{https://www.stat.berkeley.edu/~nhejazi}{\tt stat.berkeley.edu/\textasciitilde{}nhejazi}
+
+\vspace{5mm}
+
+\href{http://nimahejazi.org}{\tt nimahejazi.org}
+
+\vspace{5mm}
+
+\href{https://twitter.com/nshejazi}{\tt twitter/@nshejazi}
+
+\vspace{5mm}
+
+\href{https://github.com/nhejazi}{\tt github/nhejazi}
+
+\note{Here's where you can find me, as well as the slides for this talk.}
+
+\end{frame}
+
+
+
+\end{document}
