@@ -1,6 +1,6 @@
-TITLE = talk_template
+TITLE = talk_berkeley_methyvim
 
-.PHONY : $(TITLE).pdf
+.PHONY : all
 all: $(TITLE).pdf notes clean
 
 $(TITLE).pdf: $(TITLE).tex header.tex
