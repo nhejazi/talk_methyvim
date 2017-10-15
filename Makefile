@@ -1,4 +1,4 @@
-TITLE = talk_berkeley_methyvim
+TITLE = 2017_berkeley_methyvim
 
 .PHONY : all
 all: $(TITLE).pdf notes clean
