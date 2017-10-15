@@ -29,9 +29,9 @@ data analysis with real DNA methylation data, and a recently developed R package
 with this methodology is introduced.
 
 ### Related
-* Slides (for presentation only) are available [here](https://goo.gl/i3CxL9).
+* Slides (for presentation only) are available [here](https://goo.gl/JDhSEg).
 
-* Slides with notes are available [here](https://goo.gl/8RWEy5) (printer
+* Slides with notes are available [here](https://goo.gl/xabp3Q) (printer
    friendly).
 
 * Software (R package): `methyvim`, available on
