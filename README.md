@@ -25,7 +25,7 @@ differential methylation and providing a multiple testing correction that
 appropriately controls the False Discovery Rate in such multi-stage analysis
 settings. The effectiveness of the new methodology is demonstrated by way of
 data analysis with real DNA methylation data, and a recently developed R package
-("methyvim," available via Bioconductor) that provides support for data analysis
+(`methyvim`; available via Bioconductor) that provides support for data analysis
 with this methodology is introduced.
 
 ### Related
