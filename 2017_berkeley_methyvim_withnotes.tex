@@ -41,10 +41,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % title info
-\title{Targeting Differential Methylation}
+\title{\large Data-Adaptive Estimation and Inference in the Analysis of
+  Differential Methylation}
 \subtitle{\scriptsize for the annual retreat of the \textit{Center for
                       Computational Biology},\\
-                    given 18 November, 2017}
+                    given 18 November, 2017
+                    \\[-10pt]
+         }
 \author{\href{http://nimahejazi.org}{Nima Hejazi}
        \\[-10pt]
        }
@@ -108,10 +111,15 @@
 \begin{center}
 \begin{itemize}
   \itemsep12pt
-  \item point here
-  \item point here
-  \item point here
-  \item point here
+  \item DNA methylation data is \textit{extremely} high-dimensional --- we can
+    collect data on 850K genomic sites with modern arrays!
+  \item Normalization is a critical component of properly analyzing modern DNA
+    methylation data sets, and there are many choices of technique.
+  \item There is a relative scarcity of techniques for estimation and inference
+    --- analyses are often limited to the general linear model.
+  \item Statistical causal inference provides an avenue for answering richer
+    scientific questions, especially when combined with modern advances in
+    machine learning.
 \end{itemize}
 \end{center}
 
@@ -150,7 +158,137 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Setting the Stage, Part I}
+\begin{frame}[c]{Motivation: Let's meet the data}
+
+\begin{center}
+\begin{itemize}
+  \itemsep12pt
+  \item Observational study of the impact of occupational exposure to benzene on
+    DNA methylation.
+  \item Phenotype-level quantities: $216$ subjects, binary exposure status of
+    each subject, background info on subjects (e.g., sex, age).
+  \item Genomic-level quantities: $\sim 850,000$ CpG sites interrogated using
+    the \textit{Infinium MethylationEPIC BeadChip} by Illumina.
+  \item \textbf{Question}: How does exposure induce differential methylation? Is
+    a coherent biomarker-type signature detectable?
+\end{itemize}
+\end{center}
+
+\note{
+...
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Data analysis? Not yet. Normalization!}
+
+\begin{center}
+\begin{itemize}
+  \item Need to normalize the data
+  \item Blah blah blah
+  \item Images from Rachael
+\end{itemize}
+\end{center}
+
+\note{
+...
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Data analysis? It's hard.}
+\begin{center}
+\begin{itemize}
+  \itemsep12pt
+  \item SOP: For each biomarker ($b = 1, \dots, B$), fit a linear model:
+    \[
+    \mathbb{E}[y_b] = X \beta_b
+    \]
+  \item SOP: Test the coefficent of interest using a standard t-test:
+    \[
+      t_{b} = \frac{\hat{\beta}_{b} - \beta_{b, H_0}}{s_b}
+    \]
+  \item Such models are a matter of convenience: does $\hat{\beta}_{b}$ really
+    answer our questions?
+  \item Treating CpG sites as acting independently runs counter to biological
+    notions of such sites functioning in networks.
+\end{itemize}
+\end{center}
+
+
+\note{
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Target parameters for complex questions}
+
+\begin{center}
+\begin{itemize}
+  \itemsep12pt
+  \item Rather than being satisfied with $\hat{\beta}_{b}$ as an answer to our
+    questions, let's consider a simple target parameter: the average treatment
+    effect (ATE):
+    \[
+      \Psi_b(P_0) = \mathbb{E}_{W,0}[\mathbb{E}_0[Y_b \mid A = a_{high}, W] -
+      \mathbb{E}_0[Y_b \mid A = a_{low}, W]]
+    \]
+  \item No need to specify a functional form or assume that we know the true
+    data-generating distribution $P_0$.
+  \item Parameters like this can be estimated using \textit{targeted minimum
+    loss-based estimation} (TMLE).
+  \item \textbf{Asymptotic linearity:}
+    \[
+      \Psi_b(P_n^*) - \Psi_b(P_0) = \frac{1}{n} \sum_{i = 1}^{n} IC(O_i) +
+      o_P(\frac{1}{\sqrt{n}})
+    \]
+\end{itemize}
+\end{center}
+
+\note{By allowing scientific questions to inform the parameters that we choose
+      to estimate, we can do a better job of actually answering the questions of
+      interest to our collaborators. Further, we abandon the need to specify the
+      functional relationship between our outcome and covariates; moreover, we
+      can now make use of advances in machine learning.
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Data analysis? A data-adaptive approach.}
+
+\begin{center}
+\begin{enumerate}
+  \item Pre-screening of genomic sites is used to isolate a subset of sites for
+    which there is cursory evidence of differential methylation.
+  \item Nonparametric estimates of VIMs, for the specified target parameter, are
+   computed at each of the CpG sites passing the screening step. The VIMs are
+   defined in such a way that the estimated effects is of an exposure/treatment
+   on the methylation status of a target CpG site, controlling for the observed
+   methylation status of the neighbors of that site.
+ \item When there are too many neighbors, Partitioning Around Medoids (PAM) is
+   used to select the largest number of neighbors that can be controlled for.
+ \item Since pre-screening is performed prior to estimating VIMs, we make use of a
+   multiple testing correction uniquely suited to such settings. Due to the
+   multiple testing nature of the estimation problem, a variant of the Benjamini
+   \& Hochberg procedure for controlling the False Discovery Rate (FDR) is
+   applied
+\end{enumerate}
+\end{center}
+
+\note{
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Pre-Screening}
 
 \begin{center}
 \begin{itemize}
@@ -166,7 +304,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Setting the Stage, Part II}
+\begin{frame}[c]{Too Many Neighbors? PAM}
 
 \begin{center}
 \begin{itemize}
@@ -182,7 +320,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Setting the Stage, Part III}
+\begin{frame}[c]{Nonparametric Estimation of a VIM}
 
 \begin{center}
 \begin{itemize}
@@ -198,7 +336,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Introducing the Method or Approach, Part I}
+\begin{frame}[c]{Correcting for Multiple Testing}
 
 \begin{center}
 \begin{itemize}
@@ -214,7 +352,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Introducing the Method or Approach, Part II}
+\begin{frame}[c]{Software package: R/``methyvim''}
 
 \begin{center}
 \begin{itemize}
@@ -230,7 +368,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Introducing the Method or Approach, Part III}
+\begin{frame}[c]{Data analysis the ``methyvim'' way}
 
 \begin{center}
 \begin{itemize}
@@ -246,7 +384,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Discussion of Results, Part I}
+\begin{frame}[c]{Data analysis results with ``methyvim'': p-values}
 
 \begin{center}
 \begin{itemize}
@@ -262,7 +400,23 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[c]{Discussion of Results, Part II}
+\begin{frame}[c]{Data analysis results with ``methyvim'': Volcano}
+
+\begin{center}
+\begin{itemize}
+  \item ...
+  \item ...
+\end{itemize}
+\end{center}
+
+\note{
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[c]{Data analysis results with ``methyvim'': Heatmap}
 
 \begin{center}
 \begin{itemize}
