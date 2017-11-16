@@ -1,4 +1,4 @@
-# Talk: _Targeting Differential Methylation_
+# Talk: _Data-Adaptive Differential Methylation Analysis_
 
 > Materials for a presentation given at the annual retreat of the [Center for
 > Computational Biology](http://ccb.berkeley.edu/), at the University of
@@ -44,7 +44,8 @@ with this methodology is introduced.
 
 To the extent possible under law, [Nima Hejazi](http://nimahejazi.org)
 has waived all copyright and related or neighboring rights to
-&ldquo;[Targeting Differential Methylation](https://www.stat.berkeley.edu/~nhejazi/present/2017_berkeley_methyvim.pdf)&rdquo;.
+&ldquo;[Data-Adaptive Estimation and Inference in the Analysis of Differential
+Methylation](https://www.stat.berkeley.edu/~nhejazi/present/2017_berkeley_methyvim.pdf)&rdquo;.
 This work is published from the United States.
 <br/>
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
