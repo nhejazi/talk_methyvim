@@ -159,7 +159,12 @@
 \begin{itemize}
   \itemsep10pt
   \item FASD is an abbreviation for Fetal Alcohol Spectrum Disorders.
-  \item ...
+  \item We're mostly interested in the interplay between disease and DNA
+    methylation.
+  \item In particular, we'd like to construct some kind of importance score for
+    CpG sites impacted by the exposure/disease of interest.
+  \item Re: dimensionality, c.f., RNA-seq analyses are $\sim 30,000$ in
+    dimension at the gene level.
 \end{itemize}
 }
 
@@ -180,7 +185,11 @@
 \note{
 \begin{itemize}
   \itemsep10pt
-  \item ...
+  \item The biology of these structures is quite complicated: many different
+    structures --- CpG islands, shores, etc.
+  \item Both hypermethylation and hypomethylation are linked to disease states.
+  \item It's especially important to examine these processes, keeping in mind
+    that the process may be complex and non-monotonic.
 \end{itemize}
 }
 
@@ -213,6 +222,11 @@
   \itemsep10pt
   \item CpG sites are thought to function in networks. Treating them as acting
     independently is \textit{not} faithful to the underlying biology.
+  \item The linear model is a great starting point for analyses whne the data is
+    generated using complex technology --- no need to make the analysis more
+    complicated.
+  \item That being said, the data is difficult and expensive to collect, so why
+    restrict the scope of the questions we'd like to ask.
 \end{itemize}
 }
 \end{frame}
@@ -278,8 +292,11 @@ of the given CpG site?
 \begin{itemize}
   \itemsep10pt
   \item Pre-screening is a critical step since we cannot perform computationally
-    intensive estimation on...
-  \item ...
+    intensive estimation on all the sites. This is flexible --- just use your
+    favorite method (as long as allows a ranking to be made).
+  \item The variable importance step merely comes down to the creation of a
+    score. We use TMLE to statistically estimate parameters from causal models.
+    The procedure is general enough to accomodate any inference technique.
 \end{itemize}
 }
 
@@ -308,8 +325,6 @@ of the given CpG site?
 \note{
 \begin{itemize}
   \itemsep10pt
-  \item ...
-  \item ...
   \item We'll be adding to the available routines for pre-screening too! For
     now, we have \textsc{limma}, and more are on the way.
 \end{itemize}
@@ -340,9 +355,10 @@ of the given CpG site?
 \note{
 \begin{itemize}
   \itemsep10pt
-  \item ...
-  \item ...
-  \item ...
+  \item The number of sites that we can control for is roughly a function of
+    sample size. This impacts the definition of the parameter that we estimate,
+    and allows enough flexibility to obtain either very local or more regional
+    estimates.
 \end{itemize}
 }
 
@@ -492,9 +508,8 @@ may be obtained using the bootstrap or computed directly via $ \sigma_n^2 =
 \note{
 \begin{itemize}
   \itemsep10pt
-  \item Contribute on GitHub
-  \item Reach out to us with questions and feature requests
-  \item ...
+  \item Contribute on GitHub.
+  \item Reach out to us with questions and feature requests.
 \end{itemize}
 }
 
@@ -513,12 +528,6 @@ may be obtained using the bootstrap or computed directly via $ \sigma_n^2 =
 \end{figure}
 
 \note{
-\begin{itemize}
-  \itemsep10pt
-  \item ...
-  \item ...
-  \item ...
-\end{itemize}
 }
 
 \end{frame}
