@@ -9,8 +9,7 @@
 
 ### Title: Data-Adaptive Estimation and Inference for Differential Methylation Analysis
 
-### Authors: [Nima Hejazi](https://statistics.berkeley.edu/~nhejazi), [Alan Hubbard](https://hubbard.berkeley.edu), [Mark van der
-Laan](https://vanderlaan-lab.org)
+### Authors: [Nima Hejazi](https://statistics.berkeley.edu/~nhejazi), [Alan Hubbard](https://hubbard.berkeley.edu), [Mark van der Laan](https://vanderlaan-lab.org)
 
 ### Abstract
 
@@ -35,9 +34,9 @@ data analysis with real DNA methylation data, and a recently developed R package
 with this methodology is introduced.
 
 ### Related
-* Slides (for presentation only) are available [here](https://goo.gl/JDhSEg).
+* Slides are available [here](https://goo.gl/JDhSEg).
 
-* Software (R package): `methyvim`:
+* R package `methyvim`:
     * GitHub: https://github.com/nhejazi/methyvim
     * Bioconductor: https://bioconductor.org/packages/methyvim
     * Documentation: https://code.nimahejazi.org/methyvim
