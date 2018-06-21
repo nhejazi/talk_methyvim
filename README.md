@@ -1,10 +1,16 @@
-# Talk: _Data-Adaptive Differential Methylation Analysis_
+# BioC 2018 Talk: _Data-Adaptive Differential Methylation Analysis_
 
-> Materials for a presentation given at the annual retreat of the [Center for
-> Computational Biology](http://ccb.berkeley.edu/), at the University of
-> California, Berkeley
+> Materials for a presentation given at [BioC 2018: Where Software and Biology
+> Connect](http://bioc2018.bioconductor.org/), the annual meeting of the
+> [Bioconductor Project](https://bioconductor.org), at Victoria University,
+> University of Toronto, Toronto, Canada on 25-27 July 2018
 
 ---
+
+### Title: Data-Adaptive Estimation and Inference for Differential Methylation Analysis
+
+### Authors: [Nima Hejazi](https://statistics.berkeley.edu/~nhejazi), [Alan Hubbard](https://hubbard.berkeley.edu), [Mark van der
+Laan](https://vanderlaan-lab.org)
 
 ### Abstract
 
@@ -31,21 +37,17 @@ with this methodology is introduced.
 ### Related
 * Slides (for presentation only) are available [here](https://goo.gl/JDhSEg).
 
-* Slides with notes are available [here](https://goo.gl/xabp3Q) (printer
-   friendly).
-
-* Software (R package): `methyvim`, available on
-    [GitHub](https://github.com/nhejazi/methyvim) and
-    [Bioconductor](https://bioconductor.org/packages/methyvim).
+* Software (R package): `methyvim`:
+    * GitHub: https://github.com/nhejazi/methyvim
+    * Bioconductor: https://bioconductor.org/packages/methyvim
+    * Documentation: https://code.nimahejazi.org/methyvim
 
 ---
 
 ## License
 
-To the extent possible under law, [Nima Hejazi](http://nimahejazi.org)
-has waived all copyright and related or neighboring rights to
-&ldquo;[Data-Adaptive Estimation and Inference in the Analysis of Differential
-Methylation](https://www.stat.berkeley.edu/~nhejazi/present/2017_berkeley_methyvim.pdf)&rdquo;.
+To the extent possible under law, [Nima Hejazi](https://nimahejazi.org)
+has waived all copyright and related or neighboring rights to these materials.
 This work is published from the United States.
 <br/>
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)

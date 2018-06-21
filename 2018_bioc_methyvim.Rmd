@@ -1,0 +1,38 @@
+---
+title: "The `methyvim` R Package"
+subtitle: "Data-Adaptive Estimation and Inference for Differential Methylation
+  Analysis"
+author: "[Nima Hejazi](https://nimahejazi.org)"
+date: "`r lubridate::now()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringanthemer.css"]
+    nature:
+      highlightStyle: solarized_dark
+      highlightLines: true
+      countIncrementalSlides: false
+      navigation: {
+        scroll: false
+      }
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_light(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google = google_font("Montserrat", "300", "300i"),
+  code_font_google = google_font("Droid Mono")
+)
+```
+
+```{r knitr_setup, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(fig.width = 7, fig.height = 4.5, dpi = 300,
+                      fig.cap = "", fig.align = "center")
+showtext::showtext.opts(dpi = 300)
+library(methyvim)
+```
+
+# Differential methylation
+
