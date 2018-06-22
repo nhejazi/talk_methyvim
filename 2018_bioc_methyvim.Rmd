@@ -58,7 +58,7 @@ myBib <- ReadBib("./references.bib", check = FALSE)
 # Accessing these slides
 
 * Source: https://github.com/nhejazi/talk_methyvim
-* Slides: https://statistics.berkeley.edu/~nhejazi/present/2018_bioc_methyvim
+* Slides: https://bit.ly/bioc_methyvim_2018
 
 ???
 

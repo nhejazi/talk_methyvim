@@ -34,11 +34,11 @@ data analysis with real DNA methylation data, and a recently developed R package
 with this methodology is introduced.
 
 ### Related
-* Slides are available [here](https://goo.gl/JDhSEg).
+* Slides are available [here](https://bit.ly/bioc_methyvim_2018)
 
 * R package `methyvim`:
-    * GitHub: https://github.com/nhejazi/methyvim
-    * Bioconductor: https://bioconductor.org/packages/methyvim
+    * Stable release: https://bioconductor.org/packages/methyvim
+    * Development version: https://github.com/nhejazi/methyvim
     * Documentation: https://code.nimahejazi.org/methyvim
 
 ---
