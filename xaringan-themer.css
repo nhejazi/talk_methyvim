@@ -19,7 +19,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,300i);
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 @import url(https://fonts.googleapis.com/css?family=Droid+Mono);
-@import url(xaringan-themer.css);
+
 
 body {
   font-family: Montserrat, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
@@ -63,7 +63,7 @@ h1, h2, h3 {
 .remark-slide-number {
   color: #93a1a1;
   opacity: 1;
-  text-size: 0.9em;
+  font-size: 0.9em;
 }
 strong{color:#d33682;}
 a, a > code {
@@ -135,14 +135,14 @@ blockquote {
   border-left: solid 5px #cb4b16;
   padding-left: 1em;
 }
-table {
+.remark-slide table {
   margin: auto;
   border-top: 1px solid #839496;
   border-bottom: 1px solid #839496;
 }
-table thead th { border-bottom: 1px solid #839496; }
+.remark-slide table thead th { border-bottom: 1px solid #839496; }
 th, td { padding: 5px; }
-thead, tfoot, tr:nth-child(even) { background: #eee8d5 }
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #eee8d5 }
 table.dataTable tbody {
   background-color: #fdf6e3;
   color: #657b83;

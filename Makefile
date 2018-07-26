@@ -1,7 +1,7 @@
 TITLE = 2018_bioc_methyvim
 
-.PHONY : slides
-all: slides web
+.PHONY : all
+all: slides
 
 slides:
 	Rscript -e "rmarkdown::render('$(TITLE).Rmd')"
