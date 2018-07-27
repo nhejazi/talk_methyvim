@@ -274,8 +274,8 @@ NoCite(methyvim_bib)
 * A simple target causal parameter: the average treatment effect (ATE):
   $$\Psi_g(P_0) = \mathbb{E}_{W}[\mathbb{E}[Y_g \mid A = 1, W_{-g}] - \mathbb{E}[Y_g \mid A = 0, W_{-g}]]$$
 
-* Efficient Influence Function (EIF):
-  $EIF(O_i) = h_n(A,W)(Y - Q_n(A,W)) + (Q_n(A = 1, W) - Q_n(A = 0, W) + \Psi_g(P_n^*))$
+* Efficient Influence Function (EIF) in a nonparametric model:
+  $EIF = h_n(A,W)(Y - Q_n(A,W)) + (Q_n(A = 1, W) - Q_n(A = 0, W) + \Psi_g(P_n^*))$
     * Auxiliary covariate: $h_n(A, W) = \frac{2 \mathbb{I}(A = 1) - 1}{g_n(A \mid W)}$
     * Outcome regression: $Q_n := \mathbb{E}[Y \mid A, W]$ (ML?
       `r emo::ji('thinking')`)
@@ -283,7 +283,7 @@ NoCite(methyvim_bib)
       `r emo::ji('thinking')`)
 
 * Algorithmically estimate $\Psi_g(P_n^*)$ such that
-  $\frac{1}{n}\sum_{i = 1}^n EIF(O_i) = 0$.
+  $\frac{1}{n}\sum_{i = 1}^n EIF = 0$.
 
 * Optimal ensemble machine learning (via cross-validation) to estimate nuisance
   parameters of TML estimators.
@@ -299,7 +299,7 @@ NoCite(methyvim_bib)
   constituent parts (nuisance parameters) of TML estimators.
 
 * __Asymptotic linearity__ (of NP estimator)**:**
-  $$\Psi_g(P_n^*) - \Psi_g(P_0) = \frac{1}{n} \sum_{i = 1}^{n} \text{EIF}(O_i) + o_P\left(\frac{1}{\sqrt{n}}\right)$$
+  $$\Psi_g(P_n^*) - \Psi_g(P_0) = \frac{1}{n} \sum_{i = 1}^{n} \text{EIF} + o_P\left(\frac{1}{\sqrt{n}}\right)$$
 
 * __Limiting distribution:__
   $$\sqrt{n}(\Psi_g(P_n^*) - \Psi_g(P_0)) \to N(0, \text{Var(EIF)})$$
@@ -398,7 +398,7 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
 
 ---
 
-# Acknowledgements
+# Acknowledgements `r emo::ji('thanks')`
 
 <u>Science doesn't happen alone</u>:
 
@@ -412,9 +412,9 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
   * National Institute of Environmental Health Sciences: R01 ES021369-05
   * National Institute of Environmental Health Sciences: P42 ES004705-29
 
-* Many thanks to the the organizors for the opportunity to speak.
+* Many thanks to the organizers for the opportunity to speak
 
-* ...And thank you for your time `r emo::ji('thanks')`
+* ...And thank you all for your time
 
 ---
 
