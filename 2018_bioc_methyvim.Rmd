@@ -1,8 +1,8 @@
 ---
 title: "Data-Adaptive Estimation and Inference for Differential Methylation Analysis"
 subtitle: "The _`methyvim`_ R Package"
-author: "[Nima Hejazi](https://statistics.berkeley.edu/~nhejazi)"
-insitution: "University of California, Berkeley"
+author: "[Nima S. Hejazi](https://statistics.berkeley.edu/~nhejazi) | Twitter: [nshejazi](https://twitter.com/nshejazi)"
+institution: "University of California, Berkeley"
 date: "`r lubridate::round_date(lubridate::now(), unit = 'day')`"
 bibliography: references.bib
 output:
@@ -56,18 +56,19 @@ NoCite(methyvim_bib)
 
 # Preview: Summary
 
-* DNA methylation data is _extremely_ high-dimensional -- we can
-  collect data on 850K genomic sites with modern arrays!
+* __Slides:__ https://bit.ly/bioc_methyvim_2018
+
+* DNA methylation data is  high-dimensional -- we can collect data on 850K
+  genomic sites with modern arrays! (Even more with RRBS, etc.)
 
 * Normalization and QC are critical components of properly analyzing
   modern DNA methylation data. There are many choices of technique.
 
 * A relative scarcity of techniques for estimation and inference exists
-  -- analyses are often limited to the general linear model.
+  -- analyses are often limited to applications of the general linear model.
 
-* Statistical causal inference provides an avenue for answering richer
-  scientific questions, especially when combined with modern advances in
-  machine learning.
+* What if we draw on causal inference, combined with machine learning, to
+  flexibly construct answers to richer scientific questions?
 
 ???
 
@@ -78,8 +79,8 @@ NoCite(methyvim_bib)
    the annual meeting of the [Bioconductor project](https://bioconductor.org),
    in Toronto, ON, Canada, in July 2018.
 
-- We'll go over this summary again at the end of the talk. Hopefully, it will all
-   make more sense then.
+- We'll go over this summary again at the end of the talk. Hopefully, it will
+  all make more sense then.
 
 ---
 
@@ -88,9 +89,13 @@ NoCite(methyvim_bib)
 * Observational study of the impact of disease state on DNA methylation:
 
   1. $n = 216$ subjects;
-  2. Binary disease status: Fetal Alcohol Spectrum Disorders (FASD);
-  3. Potential phenotype-level confounders: sex, age, etc.;
-  4. $\sim 850,000$ CpG sites interrogated (Illumina_Infinium MethylationEPIC BeadChip_)
+
+  2. Binary disease status (A): Fetal Alcohol Spectrum Disorders;
+
+  3. Potential phenotype-level confounders (W): sex, age, etc.;
+
+  4. $\sim 850,000$ CpG sites interrogated (Illumina _Infinium MethylationEPIC
+     BeadChip_ assay technology)
 
 * __Questions__: How, if at all, does disease status affect differential
   methylation? Is a coherent biomarker-type signature detectable?
@@ -113,14 +118,17 @@ NoCite(methyvim_bib)
 * __First pass:__ For each CpG site $g = 1, \ldots, G$, fit a linear model:
   $$\mathbb{E}[y_g] = X \beta_g$$
 
-* Test the coefficent of interest using a standard t-test:
+* Test the coefficient of interest using a standard (or moderated) t-test:
   $$t_{g} = \frac{\hat{\beta}_{g} - \beta_{g, H_0}}{s_g}$$
 
 * Convenience models: does $\hat{\beta}_{g}$ answer our scientific questions?
-  Perhaps not.
+  What about the various assumptions?
 
-* Modern biotechnology, so why not use modern statistics? Machine learning?
-  Statistical inference?
+* Modern biotechnology, so why not use modern statistics?
+
+  1. Machine learning? `r emo::ji('thinking')`
+
+  2. Statistical inference?
 
 ???
 
@@ -139,8 +147,7 @@ NoCite(methyvim_bib)
 # Science Before Statistics
 
 * __Question:__ What is the effect of disease status on DNA methylation at a
-  specific CpG site, controlling for the observed methylation status of the
-  neighbors of the given CpG site?
+  CpG site of interest, considering its neighboring sites.
 
 * Treating CpG sites as acting independently is _not_ faithful to the underlying
   biology.
@@ -148,21 +155,26 @@ NoCite(methyvim_bib)
 * We should take into account the methylation status of neighboring CpG sites
   when assessing differential methylation at a single site.
 
+???
+
+* The estimation procedure should control for the observed methylation status of
+  the neighbors of the given CpG site?
+
 ---
 
 # A Data-Adaptive Approach
 
-* Isolate a subset of CpG sites for which there is cursory evidence of
-  differential methylation.
+1. Isolate a subset of CpG sites for which there is cursory evidence of
+   differential methylation.
 
-* Assign CpG sites into neighborhoods (e.g., base pair distance). If there are
-  many neighbors, apply clustering (e.g., _PAM_) to select a subset.
+2. Assign CpG sites into neighborhoods (e.g., base pair distance). If there are
+   many neighbors, apply clustering (e.g., _PAM_) to select a subset.
 
-* Estimate a _variable importance measure_ (VIM) at each CpG site, with disease
-  as intervention $A$ and controlling for neighboring CpG sites $W$.
+3. Estimate a _variable importance measure_ (VIM) at each CpG site, with disease
+   as intervention $A$ and controlling for neighboring CpG sites $W$.
 
-* Apply a variant of the Benjamini & Hochberg procedure to control FDR even when
-  initial screening is applied.
+4. Apply a variant of the Benjamini & Hochberg procedure to control FDR even when
+   initial screening is applied.
 
 ???
 
@@ -185,7 +197,7 @@ NoCite(methyvim_bib)
   CpG methylation status. Why? Fast and easy.
 
 * Select CpG sites with a marginal p-value (of $\beta$) below, say, $0.01$.
-  Apply data-adaptive procedure to this subset.
+  Apply the remainder of the algorithm to this subset.
 
 * Modeling assumptions irrelevant: this is not the statistical model we will use
   for inference.
@@ -202,18 +214,16 @@ NoCite(methyvim_bib)
 
 # Too many neighbors?
 
-* With limited sample sizes, the number of neighboring sites that may be
-  controlled for is limited.
+* Limited sample sizes but many neighbors, can't control for everything...
 
-* To faithfully answer the question of interest, choose the neighboring
-  sites that are the most representative.
+* __Solution:__ Choose the most representative set of neighboring sites.
 
 * Generate a limited set of clusters and choose the CpG sites at the center of
   these clusters as representative of the set of neighbors.
 
-* For convenience, we use PAM: __P__artitioning __A__round __M__edoids.
+* For convenience, we use PAM: <u>P</u>artitioning <u>A</u>round <u>M</u>edoids.
 
-* Nihilistic much? __An Impossiblity Theorem for Clustering__ (NIPS 2002).
+* Nihilistic much? <u>An Impossibility Theorem for Clustering</u> (NIPS 2002).
 
 * This is an _optional_ step -- only applied when set of neighbors is large.
 
@@ -230,7 +240,7 @@ NoCite(methyvim_bib)
 # NP Variable Importance
 
 * A simple target causal parameter: the average treatment effect (ATE):
-  $$\Psi_g(P_0) = \mathbb{E}_{W,0}[\mathbb{E}_0[Y_g \mid A = a_1, W_{-g}] - \mathbb{E}_0[Y_g \mid A = a_0, W_{-g}]]$$
+  $$\Psi_g(P_0) = \mathbb{E}_{W}[\mathbb{E}[Y_g \mid A = 1, W_{-g}] - \mathbb{E}[Y_g \mid A = 0, W_{-g}]]$$
 
 * A _nonparametric_ measure of how methylation at CpG sites is impacted by a
   discrete intervention.
@@ -259,6 +269,27 @@ NoCite(methyvim_bib)
 
 ---
 
+# TML Estimation
+
+* A simple target causal parameter: the average treatment effect (ATE):
+  $$\Psi_g(P_0) = \mathbb{E}_{W}[\mathbb{E}[Y_g \mid A = 1, W_{-g}] - \mathbb{E}[Y_g \mid A = 0, W_{-g}]]$$
+
+* Efficient Influence Function (EIF):
+  $EIF(O_i) = h_n(A,W)(Y - Q_n(A,W)) + (Q_n(A = 1, W) - Q_n(A = 0, W) + \Psi_g(P_n^*))$
+    * Auxiliary covariate: $h_n(A, W) = \frac{2 \mathbb{I}(A = 1) - 1}{g_n(A \mid W)}$
+    * Outcome regression: $Q_n := \mathbb{E}[Y \mid A, W]$ (ML?
+      `r emo::ji('thinking')`)
+    * Treatment mechanism: $g_n := \mathbb{E}[A \mid W]$ (ML?
+      `r emo::ji('thinking')`)
+
+* Algorithmically estimate $\Psi_g(P_n^*)$ such that
+  $\frac{1}{n}\sum_{i = 1}^n EIF(O_i) = 0$.
+
+* Optimal ensemble machine learning (via cross-validation) to estimate nuisance
+  parameters of TML estimators.
+
+---
+
 # Properties of TMLEs
 
 * No need to specify a functional form or make assumptions about the true
@@ -274,7 +305,7 @@ NoCite(methyvim_bib)
   $$\sqrt{n}(\Psi_g(P_n^*) - \Psi_g(P_0)) \to N(0, \text{Var(EIF)})$$
 
 * __Statistical inference:__
-  $$\Psi_g(P_n^*) \pm z_{1 - \alpha} \cdot \sqrt{\frac{\text{Var(EIF)}}{n}}$$
+  $$\Psi_g(P_n^*) \pm z_{(1 - \alpha)} \cdot \sqrt{\frac{\text{Var(EIF)}}{n}}$$
 
 ???
 
@@ -297,19 +328,18 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
 
 # Multiple Testing `r emo::ji('sad')`
 
-* Multiple testing corrections are critical. Without these, we
-  systematically obtain misleading results.
+* Multiple testing corrections are critical -- FDR control is common.
 
-* The Benjamini & Hochberg procedure for controlling the False Discovery
-  Rate (FDR) is a well-established technique for addressing the multiple
-  testing issue.
+* The Benjamini & Hochberg procedure is standard...but we took a shortcut by
+  employing pre-screening.
 
-* We use a modified BH-FDR procedure to account for the pre-screening step
-  of the proposed algorithm.
+* Use a modified procedure (FDR-MSA):
+  * Set p-values for all sites screened out to $1.0$.
+  * Append this set of $1$'s to the p-values obtained from the procedure.
+  * Apply the standard Benjamini-Hochberg procedure to this extended set.
 
-* This modified BH-FDR procedure for multi-stage analyses (FDR-MSA) works
-  by adding a p-value of $1.0$ for each site that did not pass pre-screening
-  then performs BH-FDR as normal.
+* Theory shows that FDR-MSA works exactly like Benjamini-Hochberg for most
+  screening procedures.
 
 ???
 
@@ -326,7 +356,7 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
   subset, which is provably true for screening procedures of a given type.
 
 * MSA controls type I error with any procedure that is a function of only
-  the type I error itself --- e.g., FWER. This does not hold for the FDR in
+  the type I error itself -- e.g., FWER. This does not hold for the FDR in
   complete generality.
 
 ---
@@ -356,13 +386,15 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
 
 # Future Work
 
-* Combining estimates of the positional importance (DMP) of CpG sites into
-  estimates and statistical inference for region discovery (DMR).
+* _F1000_ article on the `methyvim` R package -- imminent.
+
+* Combining DMP estimates (for CpG sites) into estimates and statistical
+  inference for DMR discovery.
 
 * Enhanced interoperability with existing methodology and packages (e.g.,
   `minfi`, `DelayedArray`).
 
-* Consideration of and extension to alternative data types (e.g., RRBS).
+* Extensions for alternative data types (e.g., RRBS, WGBS).
 
 ---
 
@@ -380,7 +412,9 @@ $\sigma_n^2 = \frac{1}{n} \sum_{i = 1}^{n} D^2(\bar{Q}_n^*, g_n)(O_i)$
   * National Institute of Environmental Health Sciences: R01 ES021369-05
   * National Institute of Environmental Health Sciences: P42 ES004705-29
 
-* Thanks for your time `r emo::ji('thanks')`
+* Many thanks to the the organizors for the opportunity to speak.
+
+* ...And thank you for your time `r emo::ji('thanks')`
 
 ---
 
@@ -394,14 +428,14 @@ PrintBibliography(methyvim_bib)
 
 # Review: Summary
 
-* DNA methylation data is _extremely_ high-dimensional -- we can
-  collect data from 850K to millions of CpG sites with modern assays!
+* DNA methylation data is  high-dimensional -- we can collect data on 850K
+  genomic sites with modern arrays! (Even more with RRBS, etc.)
 
 * Normalization and QC are critical components of properly analyzing
   modern DNA methylation data. There are many choices of technique.
 
 * A relative scarcity of techniques for estimation and inference exists
-  -- analyses are often limited to (generalized) linear models.
+  -- analyses are often limited to applications of the general linear model.
 
 * Developments in statistical causal inference may be leveraged to answer richer
   scientific questions about DNA methylation.
