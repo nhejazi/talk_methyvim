@@ -3,7 +3,7 @@ title: "Data-Adaptive Estimation and Inference for Differential Methylation Anal
 subtitle: "The _`methyvim`_ R Package"
 author: "[Nima S. Hejazi](https://statistics.berkeley.edu/~nhejazi) | Twitter: [nshejazi](https://twitter.com/nshejazi)"
 institution: "University of California, Berkeley"
-date: "`r lubridate::round_date(lubridate::now(), unit = 'day')`"
+date: "`r lubridate::round_date(lubridate::now(), unit = 'minute')`"
 bibliography: references.bib
 output:
   xaringan::moon_reader:
